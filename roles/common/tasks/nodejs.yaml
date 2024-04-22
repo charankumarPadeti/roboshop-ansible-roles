@@ -1,10 +1,16 @@
-- name: disable old module and enable nodejs:18
-  ansible.builtin.shell: dnf module disable nodejs -y ; dnf module enable nodejs:18 -y
-
 - name: install nodejs -y
   ansible.builtin.dnf:
     name: nodejs
     state: present
+
+- name: create roboshop user
+  ansible.builtin.user:
+    name: roboshop
+
+- name: Recursively remove app directory
+  ansible.builtin.file:
+    path: /app
+    state: absent
 
 - name: install dependencies
   ansible.builtin.command: npm install
