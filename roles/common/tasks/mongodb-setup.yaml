@@ -15,7 +15,7 @@
 
 - name: get the user entries count
   ansible.builtin.shell: mongo --host mongodb.charan.fun --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
-  register: entries_count
+  register: users_count
   when: component == "user"
 
 #- name: print the count
@@ -25,7 +25,8 @@
 - name: load catalogue data
   ansible.builtin.shell: "mongo --host mongodb.charan.fun < /app/schema/{{component}}.js"
   when: products_count.stdout == "0"  and component =="catalogue" # keep double quotes
-
+  ignore_errors:  true
+  
 - name: load user data
   ansible.builtin.shell: "mongo --host mongodb.charan.fun < /app/schema/{{component}}.js"
   when: products_count.stdout == "0"  and component =="user" # keep double quotes
