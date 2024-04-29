@@ -30,4 +30,4 @@
 - name: load user data
   ansible.builtin.shell: "mongo --host mongodb.charan.fun < /app/schema/{{component}}.js"
   when: component == "user" and products_count.stdout == "0" # keep double quotes
-  
+  ignore_errors:  true
