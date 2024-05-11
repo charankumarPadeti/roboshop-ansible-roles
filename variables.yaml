@@ -1,2 +1,3 @@
 MONGODB_HOST: mongodb.charan.fun
 REDIS_HOST: redis.charan.fun
+CATALOGUE_HOST: catalogue.charan.fun
